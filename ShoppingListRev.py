@@ -45,11 +45,18 @@ def main():
 
 def add_shopping_list(item):
     item = item.lower()
-    if item not in shopping_list:
-        shopping_list.append(item)
-        print "Here's your updated list", sorted_shopping_list()
+    item_list = []
+    if "," in item:
+        item_list.extend(split_string(item))
     else:
-        print "This item %s already exists!" % (item)
+        item_list.append(item)
+        
+    for itm in item_list:
+            if itm not in shopping_list:
+                shopping_list.append(itm)
+                print "Here's your updated list", sorted_shopping_list()
+            else:
+                print "This item %s already exists!" % (itm)
 
 
 def sorted_shopping_list():
@@ -81,7 +88,12 @@ def replace_item(old_item, new_item):
         print "%s is not in the list." % (old_item)
 
 
-
+def split_string(item):
+    temp_list = []
+    split_items = list(item.split(", "))
+    for sp_item in split_items:
+         temp_list.append(sp_item)
+    return temp_list
 
 # # TEST FUNCTIONS
 # # 1 - add 4 times to your shopping list
